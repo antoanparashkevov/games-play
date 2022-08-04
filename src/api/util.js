@@ -21,12 +21,12 @@ export function setUserData(data) {
     localStorage.setItem('user', JSON.stringify(data))
 }
 
+//decorator func who add a behaviour to handler func
 export function createSubmitHandler(ctx, handler) {//to remove the boiler plate from processing the forms
     return function (event) {
         event.preventDefault();
         const formData = Object.fromEntries(new FormData(event.target))
 
-        //decorator func
         handler(ctx, formData, event)
     }
 }

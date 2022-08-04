@@ -25,5 +25,7 @@ page.start();
 
 //get services
 
-import * as api from './api/gamesService.js'
-window.api = api;
+import * as apiGames from './api/gamesService.js'
+import * as apiUser from './api/user.js'
+window.apiGames = apiGames;
+window.apiUser = apiUser;

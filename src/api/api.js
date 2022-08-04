@@ -8,10 +8,10 @@ const host = 'http://localhost:3030'
         headers: {}
     }
     const token = getAccessToken();
-    if (token !== null) {
+    if (token) {
         options.headers['X-Authorization'] = token;
     }
-    if (data !== null) {
+    if (data) {
         options.headers['Content-Type'] = 'application/json'
         options.body = JSON.stringify(data);
     }

@@ -1,7 +1,7 @@
 import page from '../node_modules/page/page.mjs'
 
 //routing table
-page('/', ()=>console.log('it works'))
+page('/', ()=>console.log('home page'))
 page('/catalog', ()=>console.log('catalog page'))
 page('/create', ()=>console.log('create page'))
 page('/details/:id', ()=>console.log('details page'))

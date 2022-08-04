@@ -35,7 +35,5 @@ export function parseQueryString(query = '') {
     return Object.fromEntries(
         query
             .split('&')
-            .map(kvp
-                =>
-                kvp.split('=')))//[['key','value],['key','value']]
+            .map(kvp => kvp.split('=')))//[['key','value],['key','value']]
 }

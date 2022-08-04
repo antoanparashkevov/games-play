@@ -22,3 +22,8 @@ page('/login', loginPage)
 page('/register', registerPage)
 
 page.start();
+
+//get services
+
+import * as api from './api/gamesService.js'
+window.api = api;

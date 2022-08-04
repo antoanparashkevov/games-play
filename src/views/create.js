@@ -1,32 +1,58 @@
 import {html} from '../../node_modules/lit-html/lit-html.js'
+import {createSubmitHandler} from "../api/util.js";
+import * as gamesService from '../api/gamesService.js'
 
 
-const createTemplate = ()=>html
-    `         <section id="create-page" class="auth">
-        <form id="create">
-            <div class="container">
+const createTemplate = (onSubmit) => html
+    `
+        <section id="create-page" class="auth">
+            <form id="create" @submit="${onSubmit}">
+                <div class="container">
 
-                <h1>Create Game</h1>
-                <label for="leg-title">Legendary title:</label>
-                <input type="text" id="title" name="title" placeholder="Enter game title...">
+                    <h1>Create Game</h1>
+                    <label for="leg-title">Legendary title:</label>
+                    <input type="text" id="title" name="title" placeholder="Enter game title...">
 
-                <label for="category">Category:</label>
-                <input type="text" id="category" name="category" placeholder="Enter game category...">
+                    <label for="category">Category:</label>
+                    <input type="text" id="category" name="category" placeholder="Enter game category...">
 
-                <label for="levels">MaxLevel:</label>
-                <input type="number" id="maxLevel" name="maxLevel" min="1" placeholder="1">
+                    <label for="levels">MaxLevel:</label>
+                    <input type="number" id="maxLevel" name="maxLevel" min="1" placeholder="1">
 
-                <label for="game-img">Image:</label>
-                <input type="text" id="imageUrl" name="imageUrl" placeholder="Upload a photo...">
+                    <label for="game-img">Image:</label>
+                    <input type="text" id="imageUrl" name="imageUrl" placeholder="Upload a photo...">
 
-                <label for="summary">Summary:</label>
-                <textarea name="summary" id="summary"></textarea>
-                <input class="btn submit" type="submit" value="Create Game">
-            </div>
-        </form>
-    </section>
+                    <label for="summary">Summary:</label>
+                    <textarea name="summary" id="summary"></textarea>
+                    <input class="btn submit" type="submit" value="Create Game">
+                </div>
+            </form>
+        </section>
     `
 
-export function createPage(ctx){
-    ctx.render(createTemplate())
+export function createPage(ctx) {
+    ctx.render(createTemplate(createSubmitHandler(ctx, onSubmit)))
+}
+
+async function onSubmit(ctx, data, event) {
+    console.log(data)//from input fields
+
+    //because data is just an obj
+    const isEmpty = Object.values(data).some(v => v === '')//true if one value is empty string
+
+    if (isEmpty) {
+        alert('All fields are required!')
+        return;
+    }
+    await gamesService.createGame({
+        title:data.title,
+        category:data.category,
+        maxLevel:data.maxLevel,
+        imageUrl:data.imageUrl,
+        summary:data.summary,
+
+    })
+    event.target.reset()//reset all input fields
+    ctx.page.redirect('/')
+
 }

@@ -20,6 +20,7 @@ page('/details/:id', detailsPage)
 page('/edit/:id', editPage)
 page('/login', loginPage)
 page('/register', registerPage)
+page('/logout', onLogout)
 
 page.start();
 
@@ -29,3 +30,8 @@ import * as apiGames from './api/gamesService.js'
 import * as apiUser from './api/user.js'
 window.apiGames = apiGames;
 window.apiUser = apiUser;
+
+function onLogout(){
+    apiUser.logout()
+    page.redirect('/')
+}

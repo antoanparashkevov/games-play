@@ -7,10 +7,12 @@ import {detailsPage} from "./views/details.js";
 import {editPage} from "./views/edit.js";
 import {loginPage} from "./views/login.js";
 import {registerPage} from "./views/register.js";
+import {addSession} from './middleware/session.js'
 
 //routing table
 
 //as global middleware
+page(addSession)
 page(addRender)
 
 page('/', homePage)

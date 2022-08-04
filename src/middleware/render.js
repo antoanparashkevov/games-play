@@ -9,6 +9,7 @@ function ctxRender(content){
 
 //function that wil be executed before page handler
 export function addRender(ctx,next){
+    console.log(ctx.user)
     ctx.render = ctxRender;//as reference
     next();
 }

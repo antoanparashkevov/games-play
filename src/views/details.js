@@ -57,5 +57,6 @@ const detailsTemplate = ()=>html
     `
 
 export function detailsPage(ctx){
+    const gameId = ctx.params.id;
     ctx.render(detailsTemplate())
 }

@@ -60,7 +60,7 @@ const detailsTemplate = (game, onDelete) => html
 
 export async function detailsPage(ctx) {
     const gameId = ctx.params.id;
-    console.log(gameId)
+    // console.log(gameId)
     const game = await gamesService.getById(gameId)
 
     if (ctx.user) {//if don't have user -> null, that is falsy value

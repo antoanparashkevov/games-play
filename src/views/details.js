@@ -20,21 +20,7 @@ const detailsTemplate = (game, onDelete) => html
                 </p>
 
                 <!-- Bonus ( for Guests and Users ) -->
-                <div class="details-comments">
-                    <h2>Comments:</h2>
-                    <ul>
-                        <!-- list all comments for current game (If any) -->
-                        <li class="comment">
-                            <p>Content: I rate this one quite highly.</p>
-                        </li>
-                        <li class="comment">
-                            <p>Content: The best game.</p>
-                        </li>
-                    </ul>
-                    <!-- Display paragraph: If there are no games in the database -->
-                    <p class="no-comment">No comments.</p>
-                </div>
-
+              
                 ${game.isOwner
                         ? html`
                             <div class="buttons">

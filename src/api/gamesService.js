@@ -6,7 +6,8 @@ const endpoints = {
     all:'/data/games?sortBy=_createdOn%20desc',
     create:'/data/games',
     byId:'/data/games/',
-    delById:'/data/games/'
+    delById:'/data/games/',
+    updateById:'/data/games/'
 }
 
 export async function getRecentGames() {
@@ -27,4 +28,8 @@ export async function getById(id){
 
 export async function delById(id){
     return api.del(endpoints.delById + id)
+}
+
+export async function updateGame(id,data){
+    return api.put(endpoints.updateById, data)
 }

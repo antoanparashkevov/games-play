@@ -12,8 +12,8 @@ const commentFormTemplate = ()=> html
 
 
 
-export async function commentFormView(ctx,gameId){
-    if(ctx.user){
+export  function commentFormView(ctx,gameId){
+    if(ctx.user){//only authorized users can type comments.
         return commentFormTemplate()
     }else{
         return nothing

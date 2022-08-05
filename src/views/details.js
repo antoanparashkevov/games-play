@@ -1,9 +1,10 @@
 import {html, nothing} from '../../node_modules/lit-html/lit-html.js'
 import * as gamesService from '../api/gamesService.js'
 import {commentsView} from "./comments.js";
+import {commentFormView} from "./commentForm.js";
 
 
-const detailsTemplate = (game, commentsView,onDelete) => html
+const detailsTemplate = (game, commentsView, commentFormSection, onDelete) => html
     `
         <section id="game-details">
             <h1>Game Details</h1>
@@ -20,9 +21,8 @@ const detailsTemplate = (game, commentsView,onDelete) => html
                     ${game.summary}
                 </p>
 
-                <!-- Bonus ( for Guests and Users ) -->
-              ${commentsView}
-                
+                ${commentsView}
+
                 ${game.isOwner
                         ? html`
                             <div class="buttons">
@@ -33,9 +33,7 @@ const detailsTemplate = (game, commentsView,onDelete) => html
 
             </div>
 
-            <!-- Bonus -->
-            <!-- Add Comment ( Only for logged-in users, which is not creators of the current game ) -->
-            
+            ${commentFormSection}
 
         </section>
     `
@@ -43,16 +41,17 @@ const detailsTemplate = (game, commentsView,onDelete) => html
 export async function detailsPage(ctx) {
     const gameId = ctx.params.id;
     // console.log(gameId)
-    const [game,commentsSection] = await Promise.all([
-         gamesService.getById(gameId),
+    const [game, commentsSection] = await Promise.all([
+        gamesService.getById(gameId),
         commentsView(gameId)
     ])
+    const commentFormSection = commentFormView(ctx, gameId)
 
     if (ctx.user) {//if don't have user -> null, that is falsy value
         game.isOwner = ctx.user._id === game._ownerId;//if it is true, that is the owner of the game
 
     }
-    ctx.render(detailsTemplate(game,commentsSection, onDelete))
+    ctx.render(detailsTemplate(game, commentsSection, commentFormSection, onDelete))
 
     async function onDelete() {
         const choice = confirm('Are you sure you want to delete this game?')

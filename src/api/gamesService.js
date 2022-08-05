@@ -31,5 +31,5 @@ export async function delById(id){
 }
 
 export async function updateGame(id,data){
-    return api.put(endpoints.updateById, data)
+    return api.put(endpoints.updateById + id, data)
 }

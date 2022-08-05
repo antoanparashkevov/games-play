@@ -5,7 +5,8 @@ const endpoints = {
     recent: '/data/games?sortBy=_createdOn%20desc&distinct=category',
     all:'/data/games?sortBy=_createdOn%20desc',
     create:'/data/games',
-    byId:'/data/games/'
+    byId:'/data/games/',
+    delById:'/data/games/'
 }
 
 export async function getRecentGames() {
@@ -22,4 +23,8 @@ export async function createGame(data){
 
 export async function getById(id){
     return api.get(endpoints.byId + id)
+}
+
+export async function delById(id){
+    return api.del(endpoints.delById + id)
 }

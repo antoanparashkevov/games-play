@@ -30,8 +30,10 @@ page.start();
 
 import * as apiGames from './api/gamesService.js'
 import * as apiUser from './api/user.js'
+import * as apiComments from './api/comments.js'
 window.apiGames = apiGames;
 window.apiUser = apiUser;
+window.apiComments = apiComments;
 
 function onLogout(){
     apiUser.logout()

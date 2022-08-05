@@ -23,7 +23,13 @@ export  function commentFormView(ctx){
 
 async function onSubmit(ctx,data,event){
     const gameId = ctx.params.id
-    console.log(gameId)
+    // console.log(gameId)
     //value from textarea tag
-    console.log(data.comment)
+    // console.log(data.comment)
+    await commentsService.postComment({
+        gameId,
+        comment:data.comment
+    })
+    event.target.reset();
+    ctx.page.redirect(`/details/${gameId}`)
 }

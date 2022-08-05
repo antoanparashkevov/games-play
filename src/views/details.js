@@ -1,8 +1,9 @@
 import {html, nothing} from '../../node_modules/lit-html/lit-html.js'
 import * as gamesService from '../api/gamesService.js'
+import {commentsView} from "./comments.js";
 
 
-const detailsTemplate = (game, onDelete) => html
+const detailsTemplate = (game, commentsView,onDelete) => html
     `
         <section id="game-details">
             <h1>Game Details</h1>
@@ -20,7 +21,8 @@ const detailsTemplate = (game, onDelete) => html
                 </p>
 
                 <!-- Bonus ( for Guests and Users ) -->
-              
+              ${commentsView}
+                
                 ${game.isOwner
                         ? html`
                             <div class="buttons">
@@ -33,13 +35,7 @@ const detailsTemplate = (game, onDelete) => html
 
             <!-- Bonus -->
             <!-- Add Comment ( Only for logged-in users, which is not creators of the current game ) -->
-            <article class="create-comment">
-                <label>Add new comment:</label>
-                <form class="form">
-                    <textarea name="comment" placeholder="Comment......"></textarea>
-                    <input class="btn submit" type="submit" value="Add Comment">
-                </form>
-            </article>
+            
 
         </section>
     `
@@ -47,13 +43,16 @@ const detailsTemplate = (game, onDelete) => html
 export async function detailsPage(ctx) {
     const gameId = ctx.params.id;
     // console.log(gameId)
-    const game = await gamesService.getById(gameId)
+    const [game,commentsSection] = await Promise.all([
+         gamesService.getById(gameId),
+        commentsView(gameId)
+    ])
 
     if (ctx.user) {//if don't have user -> null, that is falsy value
         game.isOwner = ctx.user._id === game._ownerId;//if it is true, that is the owner of the game
 
     }
-    ctx.render(detailsTemplate(game, onDelete))
+    ctx.render(detailsTemplate(game,commentsSection, onDelete))
 
     async function onDelete() {
         const choice = confirm('Are you sure you want to delete this game?')

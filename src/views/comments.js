@@ -8,7 +8,7 @@ const commentsTemplate = (comments) => html
             <h2>Comments:</h2>
             
             ${comments.length > 0
-                    ? commentsList(commentCard)
+                    ? commentsList(comments)
                     : html`<p class="no-comment">No comments.</p>`
             }
         </div>

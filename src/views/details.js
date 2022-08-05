@@ -45,7 +45,7 @@ export async function detailsPage(ctx) {
         gamesService.getById(gameId),
         commentsView(gameId)
     ])
-    const commentFormSection = commentFormView(ctx, gameId)
+    const commentFormSection = commentFormView(ctx)
 
     if (ctx.user) {//if don't have user -> null, that is falsy value
         game.isOwner = ctx.user._id === game._ownerId;//if it is true, that is the owner of the game

@@ -1,6 +1,6 @@
 # GamesPlay
 
-A very simple application with learning purposes only. Hosted by the http-server package. Run npm i to install all dependencies and then npm start to start the http development server. To start the learning server provided by Softuni, go to server path then type node server.js
+A very simple application with learning purposes only. Hosted by the http-server package. Run `npm i` to install all dependencies and then `npm start` to start the http development server. To start the learning server provided by Softuni, go to server path then type node server.js
 
 # Visiting
 - You can visit the project from here: http://localhost:3000 
